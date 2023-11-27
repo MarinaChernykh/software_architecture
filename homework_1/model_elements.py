@@ -20,8 +20,9 @@ class Texture:
 
 class PoligonalModel:
     def __init__(self, textures: List[Texture]=[]):
-        self.poligons: List[Poligon] = [Poligon()]
+        self.poligons: List[Poligon] = []
         self.textures: List[Texture] = textures
+        self.poligons.append(Poligon(Point3D()))
 
 
 class Flash:
@@ -51,6 +52,7 @@ class Camera:
 
 
 class Scene:
+
     def __init__(
         self,
         id: int,
@@ -59,21 +61,15 @@ class Scene:
         flashes: List[Flash]=[]
     ):
         self.id: int = id
-        self.models: List[PoligonalModel] = self.set_models(models)
-        self.flashes: List[Flash] = flashes
-        self.cameras: List[Camera] = self.set_cameras(cameras)
-
-    def set_models(self, models: List[PoligonalModel]) -> None:
-        if models:
+        self.flashes = flashes
+        if len(models) > 0:
             self.models = models
         else:
-            self.models = [PoligonalModel()]
-
-    def set_cameras(self, cameras: List[Camera]) -> None:
-        if cameras:
+            raise Exception("Должна быть хотя бы одна модель")
+        if len(cameras) > 0:
             self.cameras = cameras
         else:
-            self.cameras = [Camera()]
+            raise Exception("Должна быть хотя бы одна камера")
 
     def method1(self, some_obj: Type) -> Type:
         pass
