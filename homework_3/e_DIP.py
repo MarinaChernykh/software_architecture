@@ -2,8 +2,13 @@
 # Разорвать зависимость классов Car и PetrolEngine. У машины же может быть DieselEngine.
 from abc import ABC, abstractmethod
 
-class PetrolEngine(ABC):
+class Engine(ABC):
     @abstractmethod
+    def start(self):
+        pass
+
+
+class PetrolEngine(Engine):
     def start(self):
         pass
 
